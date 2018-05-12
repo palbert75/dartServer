@@ -1,2 +1,4 @@
-name: myserver
+name: dartserver
 description: A new dart server
+dependencies:
+  http_server: any
