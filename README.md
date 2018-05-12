@@ -14,6 +14,10 @@ docker run -d -p 8080:8080 dartserver
 
 sudo docker exec -i -t  [containerID] /bin/bash
 
+or
+
+docker run -p 8080:8080  -it --entrypoint /bin/bash dartserver
+
 # Add docker imega to docker hub
 
 docker tag  dartserver palbert75/dartserver:latest
