@@ -12,4 +12,4 @@ docker run -d -p 8080:8080 dartserver
 
 # attach to docker container
 
-sudo docker exec -i -t  <containerID> /bin/bash
+sudo docker exec -i -t  [containerID] /bin/bash
