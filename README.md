@@ -36,4 +36,9 @@ oc expose svc myserver --name=myserverwelcome
 
 oc import-image myserver:1.1 --from=palbert75/dartserver:latest
 
+# To psuh a new image to OpenShift
+Set docker pull repo: docker-registry.default.svc:5000/anyabaszo12/dartserver
+
+sudo docker tag dartserver registry/anyabaszo12/dartserver:tag
+sudo docker push registry/anyabaszo12/dartserver:tag
 

@@ -30,9 +30,10 @@ void main() {
     HttpServer.bind('0.0.0.0', 8080).then((server) {
       server.listen((request) {
         if (request.uri.path == '/') {
-          print("Try to load file");
           try {
-            new File('data/file.txt').readAsString().then((String contents) {
+            File file = new File('data/file.txt');
+            file.createSync();
+            file.readAsString().then((String contents) {
               returnIndexFile(
                   request, 'File size=${contents.length}', contents);
             });
