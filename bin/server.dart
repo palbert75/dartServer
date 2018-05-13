@@ -2,23 +2,6 @@ import 'dart:io';
 import 'dart:async';
 import 'package:http_server/http_server.dart';
 
-/*main() async {
-
-  
-  var server = await HttpServer.bind(InternetAddress.LOOPBACK_IP_V4, 8080);
-  print("Serving at ${server.address}:${server.port}");
-
-  await for (var request in server) {
-
-    request.response
-      ..headers.contentType = new ContentType("text", "plain", charset: "utf-8")
-      ..write('Hello, world')
-      ..close();
-
-
-  }
-}*/
-
 
 void main() {
   var webFiles = new VirtualDirectory('web');
@@ -36,7 +19,20 @@ void main() {
                 ..writeln('Dart executable arguments: '
                           '${Platform.executableArguments}')
                 ..close();
-          } else {
+          } else if (request.uri.path == '/add') {
+      try {           new File('data/file.txt',mode:  FileMode.APPEND ).writeAsString('Dart is awsome!<br/>')
+    .then((File file) {
+       request.response.headers..contentType = ContentType.TEXT;
+            request.response
+                ..writeln('Added msg to file');
+// Do something with the file.
+    }); } catch(e) { request.response.redirect(request.uri.resolve('/index.html'));}
+          } else if (request.uri.path == '/list') {
+            new File('data/file.txt').readAsString().then((String contents) {
+            request.response
+                ..writeln(contents); });
+          }
+          else {
             webFiles.serveRequest(request);
           }
       });
