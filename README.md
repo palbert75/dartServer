@@ -2,7 +2,7 @@
 
 This is demo for openshift dart server
 
-# create docker image:
+# Create docker image:
 
 docker  build  -t dartserver .
 
@@ -10,7 +10,7 @@ docker  build  -t dartserver .
 
 docker run -d -p 8080:8080 dartserver
 
-# attach to docker container
+# Attach to docker container
 
 sudo docker exec -i -t  [containerID] /bin/bash
 
@@ -18,27 +18,21 @@ or
 
 docker run -p 8080:8080  -it --entrypoint /bin/bash dartserver
 
-# Add docker imega to docker hub
+# Add docker image to docker hub
 
 docker tag  dartserver palbert75/dartserver:latest
 docker push palbert75/dartserver:latest
 
 
-# from docker hub
+# From docker hub
 docker pull palbert75/dartserver
 docker run -d -p 8080:8080 palbert75/dartserver
 
 
 # OpenShift add app
 
-oc new-app palbert75/dartserver:latest --name myserver
-oc expose svc myserver --name=myserverwelcome
+oc new-app palbert75/dartserver
+oc expose svc dartServer
 
-oc import-image myserver:1.1 --from=palbert75/dartserver:latest
-
-# To psuh a new image to OpenShift
-Set docker pull repo: docker-registry.default.svc:5000/anyabaszo12/dartserver
-
-sudo docker tag dartserver registry/anyabaszo12/dartserver:tag
-sudo docker push registry/anyabaszo12/dartserver:tag
+oc import-image dartSerer:1.1 --from=palbert75/dartserver
 
