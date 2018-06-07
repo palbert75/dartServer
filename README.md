@@ -32,7 +32,7 @@ docker run -d -p 8080:8080 palbert75/dartserver
 # OpenShift add app
 
 oc new-app palbert75/dartserver
-oc expose svc dartServer
+oc expose svc/dartserver
 
 oc import-image dartSerer:1.1 --from=palbert75/dartserver
 
