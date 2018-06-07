@@ -36,3 +36,18 @@ oc expose svc/dartserver
 
 oc import-image dartSerer:1.1 --from=palbert75/dartserver
 
+
+helm list
+
+helm delete --purge <releasename>
+
+helm install -n <name of install>  .
+
+Change chart version in chart.yaml before each deploy
+
+helm upgrade <name of install> .
+
+oc get pod  (List of pods)
+
+
+oc logs -f <pod name>

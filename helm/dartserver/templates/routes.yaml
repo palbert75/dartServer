@@ -1,0 +1,18 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata: 
+  name:  {{ template "dartserver.fullname" . }}
+  labels:
+    app: {{ template "dartserver.name" . }}
+    chart: {{ template "dartserver.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  host: {{ .Release.Name }}-dartserver.blacksalt.cloud
+  port:
+    targetPort:  http
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name:  {{ template "dartserver.fullname" . }}

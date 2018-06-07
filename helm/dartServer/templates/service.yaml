@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "dartServer.fullname" . }}
+  name: {{ template "dartserver.fullname" . }}
   labels:
-    app: {{ template "dartServer.name" . }}
-    chart: {{ template "dartServer.chart" . }}
+    app: {{ template "dartserver.name" . }}
+    chart: {{ template "dartserver.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "dartServer.name" . }}
+    app: {{ template "dartserver.name" . }}
     release: {{ .Release.Name }}

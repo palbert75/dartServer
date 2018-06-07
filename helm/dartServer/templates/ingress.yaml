@@ -1,13 +1,13 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "dartServer.fullname" . -}}
+{{- $fullName := include "dartserver.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "dartServer.name" . }}
-    chart: {{ template "dartServer.chart" . }}
+    app: {{ template "dartserver.name" . }}
+    chart: {{ template "dartserver.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 {{- with .Values.ingress.annotations }}

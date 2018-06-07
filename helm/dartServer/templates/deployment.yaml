@@ -1,22 +1,22 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "dartServer.fullname" . }}
+  name: {{ template "dartserver.fullname" . }}
   labels:
-    app: {{ template "dartServer.name" . }}
-    chart: {{ template "dartServer.chart" . }}
+    app: {{ template "dartserver.name" . }}
+    chart: {{ template "dartserver.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "dartServer.name" . }}
+      app: {{ template "dartserver.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "dartServer.name" . }}
+        app: {{ template "dartserver.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -25,8 +25,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
+          routes:
           livenessProbe:
             httpGet:
               path: /
@@ -35,17 +36,11 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-{{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+          volumeMounts:
+          - name: data
+
+            mountPath: /app/data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName:  {{ template "dartserver.fullname" . }}

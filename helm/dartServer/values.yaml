@@ -1,4 +1,4 @@
-# Default values for dartServer.
+# Default values for dartserver.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: palbert75/dartserver
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: ClusterIP
@@ -43,3 +43,8 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# storageClass name of the storage class
+
+# capacity of the storage e.g. 10Gi
+capacity: "100Mi"
